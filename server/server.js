@@ -3,6 +3,8 @@ import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import connectDB from './config/db.js';
+import latestBlogs from './controllers/latestBlogs.js';
+import trendingBlogs from './controllers/trendingBlogs.js';
 import authRoutes from './routes/auth.js';
 import createBlog from './controllers/createBlog.js';
 import authMiddleware from './middleware/authMiddleware.js';
@@ -19,7 +21,10 @@ app.use(
 		credentials: true,
 	})
 );
+
 app.use('/auth', authRoutes);
+app.use('/latest-blogs', latestBlogs);
+app.use('/trending-blogs', trendingBlogs);
 app.post('/create-blog', authMiddleware, createBlog);
 
 // Connect to mongoDB
