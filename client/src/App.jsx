@@ -9,21 +9,15 @@ import SearchPage from './pages/Search';
 import PageNotFound from './pages/404';
 import ProfilePage from './pages/Profile';
 import BlogPage from './pages/BlogPage';
+import SidebarNav from './components/SidebarNav';
+import EditProfile from './pages/EditProfile';
 
 const App = () => {
 	return (
 		<RecoilRoot>
 			<Routes>
 				<Route
-					path="/editor"
-					element={
-						<ProtectedRoute>
-							<Editor />
-						</ProtectedRoute>
-					}
-				/>
-				<Route
-					path="/editor/:id"
+					path="/editor/:id?"
 					element={
 						<ProtectedRoute>
 							<Editor />
@@ -32,6 +26,9 @@ const App = () => {
 				/>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
+					<Route path="settings" element={<SidebarNav />}>
+						<Route path="edit-profile" element={<EditProfile />} />
+					</Route>
 					<Route path="login" element={<UserAuthForm type="Login" />} />
 					<Route path="register" element={<UserAuthForm type="Register" />} />
 					<Route path="search/:query" element={<SearchPage />} />
