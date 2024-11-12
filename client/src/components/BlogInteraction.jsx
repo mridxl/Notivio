@@ -1,26 +1,73 @@
 import { useRecoilState, useRecoilValue } from 'recoil';
 import blogPageAtom from '../common/states/blogPageAtom';
 import userAtom from '../common/states/userAtom';
+import { useState } from 'react';
+import { toast, Toaster } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { likedByUserAtom } from '../pages/BlogPage';
 
 export default function BlogInteraction() {
 	const [blog, setBlog] = useRecoilState(blogPageAtom);
 	const currentUser = useRecoilValue(userAtom);
+
 	const {
 		title,
 		blog_id,
-		activity: { total_likes, total_comments },
 		author: {
 			personal_info: { username },
 		},
 	} = blog;
+	let { total_likes, total_comments } = blog.activity;
+	const [isLiked, setIsLiked] = useRecoilState(likedByUserAtom);
+
+	// const postLike = async () => {
+	// 	console.log(blog.activity, !isLiked);
+
+	// 	// const response = await api.post('/like-blog', {
+	// 	// 	blog_id,
+	// 	// 	likedByUser: !isLiked,
+	// 	// });
+	// 	return;
+	// };
+
+	const handleLike = async () => {
+		if (!currentUser.isAuth || !currentUser.user?.username) {
+			return toast.error('Please login to like the blog');
+		}
+
+		setIsLiked((prev) => !prev);
+		!isLiked ? total_likes++ : total_likes--;
+
+		// try {
+		// 	await postLike();
+		// } catch (error) {
+		// 	toast.error('Failed to like the blog');
+		// 	setIsLiked((prev) => !prev);
+		// 	!isLiked ? total_likes-- : total_likes++;
+		// }
+		setBlog((prevBlog) => ({
+			...prevBlog,
+			activity: {
+				...prevBlog.activity,
+				total_likes,
+			},
+		}));
+	};
+
 	return (
 		<>
+			<Toaster />
 			<hr className="border-grey my-2" />
 			<div className="flex gap-6 justify-between">
 				<div className="flex gap-3 items-center">
-					<button className="h-10 w-10 rounded-full flex items-center justify-center bg-grey/80">
-						<i className="fi fi-rr-heart pt-1"></i>
+					<button
+						className={
+							'h-10 w-10 rounded-full flex items-center justify-center ' +
+							(isLiked ? 'bg-red/20 text-red' : 'bg-grey/80')
+						}
+						onClick={handleLike}
+					>
+						<i className={`fi fi-${isLiked ? 'sr' : 'rr'}-heart pt-1`}></i>
 					</button>
 					<p className="text-xl text-dark-grey">{total_likes}</p>
 					<button className="h-10 w-10 rounded-full flex items-center justify-center bg-grey/80">

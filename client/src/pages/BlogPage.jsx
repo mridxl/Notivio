@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { atom, useRecoilState, useResetRecoilState } from 'recoil';
 import { unsecureApi } from '../api/api.js';
 import formatDate from '../common/date.jsx';
 import blogPageAtom from '../common/states/blogPageAtom.js';
@@ -9,6 +9,11 @@ import Loader from '../components/Loader.jsx';
 import BlogPostCard from '../components/BlogPost.jsx';
 import BlogInteraction from '../components/BlogInteraction.jsx';
 import BlogContent from '../components/BlogContent.jsx';
+
+export const likedByUserAtom = atom({
+	key: 'likedByUserAtom',
+	default: false,
+});
 
 export default function BlogPage() {
 	const { id } = useParams();
