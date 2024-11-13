@@ -17,7 +17,7 @@ function InputBox({ name, type, id, value, placeholder, icon }) {
 				<i
 					className={
 						'fi fi-rr-eye' +
-						(showPassword ? '-crossed' : '') +
+						(!showPassword ? '-crossed' : '') +
 						' input-icon left-auto right-4 cursor-pointer'
 					}
 					onClick={() => setShowPassword((s) => !s)}
