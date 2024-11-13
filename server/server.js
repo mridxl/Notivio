@@ -12,6 +12,7 @@ import authMiddleware from './middleware/authMiddleware.js';
 import searchUsers from './controllers/searchUsers.js';
 import getProfile from './controllers/getProfile.js';
 import getBlog from './controllers/getBlog.js';
+import changePassword from './controllers/changePassword.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -34,6 +35,7 @@ app.get('/get-blog', getBlog);
 app.post('/create-blog', authMiddleware, createBlog);
 app.get('/search-users', searchUsers);
 app.get('/get-profile', getProfile);
+app.put('/change-password', authMiddleware, changePassword);
 
 // Connect to mongoDB
 connectDB();
