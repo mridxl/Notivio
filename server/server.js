@@ -13,6 +13,7 @@ import searchUsers from './controllers/searchUsers.js';
 import getProfile from './controllers/getProfile.js';
 import getBlog from './controllers/getBlog.js';
 import changePassword from './controllers/changePassword.js';
+import updateProfileImg from './controllers/updateProfileImg.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +37,7 @@ app.post('/create-blog', authMiddleware, createBlog);
 app.get('/search-users', searchUsers);
 app.get('/get-profile', getProfile);
 app.put('/change-password', authMiddleware, changePassword);
+app.put('/update-profile-img', authMiddleware, updateProfileImg);
 
 // Connect to mongoDB
 connectDB();
