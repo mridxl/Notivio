@@ -7,7 +7,7 @@ export default function SidebarNav() {
 	const { isAuth, user } = useRecoilValue(userAtom);
 	const page = window.location.pathname.split('/')[2];
 
-	const [pageState, setPageState] = useState(page.replace(/-/g, ' '));
+	const [pageState, setPageState] = useState(page?.replace(/-/g, ' '));
 	const [showSideNav, setShowSideNav] = useState(false);
 
 	const activeTabLine = useRef();
@@ -50,7 +50,7 @@ export default function SidebarNav() {
 							<button
 								ref={pageStateTab}
 								onClick={changePageState}
-								className="p-5 capitalize"
+								className="p-5 capitalize font-medium"
 							>
 								{pageState}
 							</button>
