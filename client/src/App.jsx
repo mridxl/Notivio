@@ -27,7 +27,14 @@ const App = () => {
 				/>
 				<Route path="/" element={<Layout />}>
 					<Route index element={<Home />} />
-					<Route path="settings" element={<SidebarNav />}>
+					<Route
+						path="settings"
+						element={
+							<ProtectedRoute>
+								<SidebarNav />
+							</ProtectedRoute>
+						}
+					>
 						<Route path="edit-profile" element={<EditProfile />} />
 						<Route path="change-password" element={<ChangePasswordPage />} />
 					</Route>
