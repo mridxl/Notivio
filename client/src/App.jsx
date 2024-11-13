@@ -11,6 +11,7 @@ import ProfilePage from './pages/Profile';
 import BlogPage from './pages/BlogPage';
 import SidebarNav from './components/SidebarNav';
 import EditProfile from './pages/EditProfile';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 
 const App = () => {
 	return (
@@ -28,6 +29,7 @@ const App = () => {
 					<Route index element={<Home />} />
 					<Route path="settings" element={<SidebarNav />}>
 						<Route path="edit-profile" element={<EditProfile />} />
+						<Route path="change-password" element={<ChangePasswordPage />} />
 					</Route>
 					<Route path="login" element={<UserAuthForm type="Login" />} />
 					<Route path="register" element={<UserAuthForm type="Register" />} />
