@@ -12,7 +12,7 @@ import userAtom from '../common/states/userAtom';
 import Loader from '../components/Loader';
 import AboutUser from '../components/About';
 
-const profileInitialState = {
+export const profileInitialState = {
 	personal_info: {
 		fullname: '',
 		email: '',
