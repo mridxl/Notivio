@@ -118,7 +118,7 @@ export default function SidebarNav() {
 							</NavLink>
 						</div>
 					</div>
-					<div className='"max-md:-mt-8 mt-5 w-full">'>
+					<div className="max-md:-mt-8 mt-5 w-full">
 						<Outlet />
 					</div>
 				</section>
