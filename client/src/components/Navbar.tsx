@@ -61,7 +61,7 @@ const Navbar = () => {
           </button>
           <Link
             to="/editor"
-            className="link mt-1 hidden items-center gap-2 md:flex"
+            className="link mt-1 hidden items-center gap-2 rounded-xl md:flex"
           >
             <NotebookPen className="size-6" />
             <p className="text-2xl">Write</p>
