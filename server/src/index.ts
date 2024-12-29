@@ -4,25 +4,24 @@ import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db';
+import authRouter from './routes/auth.routes';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(
   cors({
     origin: process.env.CLIENT_URL ?? 'http://localhost:5173',
     credentials: true, // allow session cookie from browser to pass through
   })
 );
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
+app.use('/auth', authRouter);
 
 // Connect to mongoDB
 connectDB();
