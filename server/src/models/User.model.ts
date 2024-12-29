@@ -3,15 +3,15 @@ import generateProfilePicture from '../utils/generateProfilePicture';
 
 // Define interfaces for User Schema
 export interface IUser extends Document {
-  personal_info: {
+  personalInfo: {
     fullname: string;
     email: string;
     passwordHash: string;
     username: string;
     bio?: string;
-    profile_img?: string;
+    profileImg?: string;
   };
-  social_links?: {
+  socialLinks?: {
     youtube?: string;
     instagram?: string;
     facebook?: string;
@@ -19,9 +19,9 @@ export interface IUser extends Document {
     github?: string;
     website?: string;
   };
-  account_info?: {
-    total_posts?: number;
-    total_reads?: number;
+  accountInfo?: {
+    totalPosts?: number;
+    totalReads?: number;
   };
   blogs?: mongoose.Types.ObjectId[];
   joinedAt?: Date;
@@ -29,7 +29,7 @@ export interface IUser extends Document {
 
 const userSchema = new Schema<IUser>(
   {
-    personal_info: {
+    personalInfo: {
       fullname: {
         type: String,
         lowercase: true,
@@ -63,12 +63,12 @@ const userSchema = new Schema<IUser>(
         maxlength: [200, 'Bio should not be more than 200'],
         default: '',
       },
-      profile_img: {
+      profileImg: {
         type: String,
         default: generateProfilePicture,
       },
     },
-    social_links: {
+    socialLinks: {
       youtube: {
         type: String,
         default: '',
@@ -94,12 +94,12 @@ const userSchema = new Schema<IUser>(
         default: '',
       },
     },
-    account_info: {
-      total_posts: {
+    accountInfo: {
+      totalPosts: {
         type: Number,
         default: 0,
       },
-      total_reads: {
+      totalReads: {
         type: Number,
         default: 0,
       },
