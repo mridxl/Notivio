@@ -1,15 +1,19 @@
-import { Link, useLocation, useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import logo from '../assets/logo.png';
 import React, { useEffect, useRef, useState } from 'react';
-import { NotebookPen, Search, X } from 'lucide-react';
+import { useRecoilValue } from 'recoil';
+import { authAtom } from '../atoms/authAtom';
+import { Bell, NotebookPen, Search, X } from 'lucide-react';
+import UserNavigationPanel from './UserNav';
 
 const Navbar = () => {
   const [searchBoxshow, setSearchBoxshow] = useState(false);
   const [navPanel, setNavPanel] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
   const navRef = useRef<HTMLInputElement>(null);
-  const location = useLocation();
   const navigate = useNavigate();
+
+  const { isAuth, user } = useRecoilValue(authAtom);
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const query = (e.target as HTMLInputElement).value.toLowerCase();
@@ -18,6 +22,20 @@ const Navbar = () => {
       setSearchBoxshow((s) => !s);
     }
   };
+
+  // close navpanel when clicked outside
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setNavPanel(false);
+      }
+    };
+    // add event listener when navPanel mounts
+    document.addEventListener('click', handleClick);
+
+    // remove event listener when navPanel unmounts
+    return () => document.removeEventListener('click', handleClick);
+  }, [navPanel]);
 
   return (
     <>
@@ -66,13 +84,39 @@ const Navbar = () => {
             <NotebookPen className="size-6" />
             <p className="text-2xl">Write</p>
           </Link>
-
-          <Link to="/login" className="btn-dark">
-            Login
-          </Link>
-          <Link to="/register" className="btn-dark hidden md:block">
-            Register
-          </Link>
+          {isAuth && user ? (
+            <>
+              <Link to="/dashboard/notification">
+                <button className="relative flex h-12 w-12 items-center justify-center rounded-full bg-grey hover:bg-black/10">
+                  <Bell className="size-6" />
+                </button>
+              </Link>
+              <div
+                className="relative pt-[.380rem]"
+                onClick={() => {
+                  setNavPanel((s) => !s);
+                }}
+                onBlur={() => setTimeout(() => setNavPanel(false), 300)}
+              >
+                <button className="h-12 w-12">
+                  <img
+                    src={user?.profileImg}
+                    className="h-full w-full rounded-full border border-dark-grey/20 object-cover"
+                  />
+                </button>
+                {navPanel && <UserNavigationPanel />}
+              </div>
+            </>
+          ) : (
+            <>
+              <Link to="/login" className="btn-dark">
+                Login
+              </Link>
+              <Link to="/register" className="btn-dark hidden md:block">
+                Register
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </>
