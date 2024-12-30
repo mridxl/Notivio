@@ -6,7 +6,7 @@ type Props = {
   initial?: Record<string, number>;
   animate?: Record<string, number>;
   transition?: Record<string, number>;
-  keyvalue: string;
+  keyvalue?: string;
   className?: string;
 };
 
