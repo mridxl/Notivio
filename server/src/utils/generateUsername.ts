@@ -10,10 +10,10 @@ const generateUsername = async (email: string) => {
     username += uuidv4().slice(0, 3);
   }
 
-  let user: IUser | null = await User.findOne({ 'personalInfo.username': username });
+  let user: IUser | null = await User.findOne({ 'personalInfo.username': username.toLowerCase() });
   while (user) {
     username = `${baseUsername}${uuidv4().slice(0, 3)}`;
-    user = await User.findOne({ 'personalInfo.username': username });
+    user = await User.findOne({ 'personalInfo.username': username.toLowerCase() });
   }
 
   return username;

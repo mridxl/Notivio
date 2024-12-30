@@ -57,6 +57,8 @@ const userSchema = new Schema<IUser>(
         type: String,
         minlength: [3, 'Username must be 3 letters long'],
         unique: true,
+        lowercase: true,
+        required: true,
       },
       bio: {
         type: String,

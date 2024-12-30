@@ -17,7 +17,7 @@ const loginController: RequestHandler = async (req: Request, res: Response) => {
   const { email, password } = req.body as LoginSchemaType;
 
   try {
-    const user: IUser | null = await User.findOne({ 'personalInfo.email': email });
+    const user: IUser | null = await User.findOne({ 'personalInfo.email': email.toLowerCase() });
 
     if (!user) {
       res.status(401).json({ error: 'Invalid email or password' });
