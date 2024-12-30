@@ -29,5 +29,5 @@ export const authenticateUser = async ({ credentials, type }: AuthData) => {
 };
 
 export const logoutUser = async () => {
-  return await axios.get(import.meta.env.VITE_BACKEND_URL + '/auth/logout');
+  return await axios.post(import.meta.env.VITE_BACKEND_URL + '/auth/logout');
 };
