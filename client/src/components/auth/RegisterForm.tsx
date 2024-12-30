@@ -9,21 +9,21 @@ function RegisterForm() {
         name="fullname"
         type="text"
         placeholder="Full Name"
-        Icon={<CircleUser />}
+        Icon={CircleUser}
       />
       <Input
         id="email"
         name="email"
         type="email"
         placeholder="Email"
-        Icon={<Mail />}
+        Icon={Mail}
       />
       <Input
         id="password"
         name="password"
         type="password"
         placeholder="Password"
-        Icon={<KeyRound />}
+        Icon={KeyRound}
       />
       <button className="btn-dark center mt-14" type="submit">
         Register

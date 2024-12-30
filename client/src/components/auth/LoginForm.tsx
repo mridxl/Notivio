@@ -9,14 +9,14 @@ function LoginForm() {
         name="email"
         type="email"
         placeholder="Email"
-        Icon={<Mail />}
+        Icon={Mail}
       />
       <Input
         id="password"
         name="password"
         type="password"
         placeholder="Password"
-        Icon={<KeyRound />}
+        Icon={KeyRound}
       />
       <button className="btn-dark center mt-14" type="submit">
         Login

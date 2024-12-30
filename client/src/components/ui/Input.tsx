@@ -23,7 +23,7 @@ function Input({ name, type, id, value, placeholder, Icon }: Props) {
         defaultValue={value}
         className="input-box"
       />
-      <Icon.type className="input-icon p-[2px]" />
+      <Icon className="input-icon p-[2px]" />
       {type === 'password' && (
         <div
           className="input-icon left-auto right-4 flex cursor-pointer flex-col items-center justify-center"
